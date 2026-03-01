@@ -538,7 +538,22 @@
       border-radius: 12px;
       font-size: 1.5rem;
       margin-bottom: 1.2rem;
+      flex-shrink: 0;
     }
+    .project-client-badge {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .22rem .7rem;
+      background: rgba(251,191,36,.07);
+      border: 1px solid rgba(251,191,36,.28);
+      border-radius: 999px;
+      font-size: .65rem; font-weight: 700;
+      color: #fbbf24;
+      letter-spacing: .3px;
+      white-space: nowrap;
+      margin-top: .4rem;
+      margin-bottom: .75rem;
+    }
+    .project-client-badge i { font-size: .6rem; }
     .project-title { font-size: 1.05rem; font-weight: 700; margin-bottom: .7rem; }
     .project-desc { font-size: .875rem; color: var(--muted2); margin-bottom: 1.4rem; flex: 1; }
     .project-tech { display: flex; flex-wrap: wrap; gap: .4rem; }
@@ -560,27 +575,120 @@
       grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
       gap: 1.2rem;
     }
+    /* ── Award cards ── */
     .ach-card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 1.6rem;
-      display: flex; gap: 1rem; align-items: flex-start;
-      transition: border-color .3s, transform .3s;
+      padding: 1.4rem 1.2rem;
+      display: flex; flex-direction: column;
+      align-items: flex-start; gap: .75rem;
+      transition: border-color .3s, transform .3s, box-shadow .3s;
+      color: inherit;
     }
-    .ach-card:hover { border-color: var(--border2); transform: translateY(-3px); }
+    .ach-card:hover { border-color: var(--border2); transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,.25); }
+    .ach-card-top { display: flex; align-items: center; gap: .85rem; }
     .ach-icon {
-      width: 44px; height: 44px; flex-shrink: 0;
+      width: 42px; height: 42px; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
-      border-radius: 10px; font-size: 1.3rem;
+      border-radius: 10px; font-size: 1.2rem;
     }
-    .ach-title { font-size: .9rem; font-weight: 700; margin-bottom: .2rem; }
-    .ach-sub { font-size: .78rem; color: var(--muted); }
-    a.ach-card { cursor: pointer; }
-    a.ach-card .ach-title {
+    .ach-title { font-size: .9rem; font-weight: 700; line-height: 1.35; transition: color .2s; }
+    .ach-sub   { font-size: .75rem; color: var(--muted); padding-left: .1rem; }
+    a.ach-card:hover .ach-title { color: var(--cyan); }
+
+    /* ── Featured CKA card ── */
+    .ach-card--featured {
+      grid-column: 1 / -1;
+      flex-direction: row; align-items: center;
+      gap: 2rem; padding: 1.8rem 2rem;
+      /* reliable cross-browser gradient border via background-clip */
+      background:
+        linear-gradient(135deg, rgba(8,12,24,.95), rgba(13,17,32,.95)) padding-box,
+        linear-gradient(135deg, var(--cyan), var(--violet), #fbbf24) border-box;
+      border: 2px solid transparent;
+      overflow: hidden;
+      position: relative;
+    }
+    /* shimmer sweep */
+    .ach-card--featured::after {
+      content: '';
+      position: absolute; top: 0; left: -100%;
+      width: 55%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.035), transparent);
+      animation: shimmer 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes shimmer { 0%,100%{left:-100%} 50%{left:150%} }
+
+    .ach-feat-logo {
+      width: 80px; height: 80px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(56,189,248,.12), rgba(129,140,248,.12));
+      border: 1px solid rgba(56,189,248,.25);
+    }
+    .ach-feat-logo img { width: 50px; height: 50px; object-fit: contain; }
+    .ach-feat-body { flex: 1; min-width: 0; }
+    .ach-feat-badge {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .22rem .75rem;
+      background: rgba(251,191,36,.1);
+      border: 1px solid rgba(251,191,36,.3);
+      border-radius: 999px;
+      font-size: .68rem; font-weight: 700;
+      color: #fbbf24; letter-spacing: .6px;
+      text-transform: uppercase;
+      margin-bottom: .6rem;
+    }
+    .ach-feat-title {
+      font-size: 1.25rem; font-weight: 800;
+      margin-bottom: .3rem; line-height: 1.2;
       transition: color .2s;
     }
-    a.ach-card:hover .ach-title { color: var(--cyan); }
+    .ach-feat-sub { font-size: .85rem; color: var(--muted2); margin-bottom: .75rem; }
+    .ach-feat-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .ach-feat-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .7rem; color: var(--cyan);
+      padding: .18rem .55rem;
+      background: rgba(56,189,248,.07);
+      border: 1px solid rgba(56,189,248,.18);
+      border-radius: 5px;
+    }
+    a.ach-card--featured:hover .ach-feat-title { color: var(--cyan); }
+    a.ach-card--featured:hover { box-shadow: 0 10px 40px rgba(56,189,248,.18); transform: translateY(-3px); }
+
+    /* ── Award cards (same style, column layout) ── */
+    .ach-card--award {
+      flex-direction: column; align-items: flex-start;
+      gap: 1rem; padding: 1.5rem;
+      background:
+        linear-gradient(135deg, rgba(8,12,24,.95), rgba(13,17,32,.95)) padding-box,
+        linear-gradient(135deg, var(--cyan), var(--violet), #fbbf24) border-box;
+      border: 1.5px solid transparent;
+      position: relative; overflow: hidden;
+    }
+    .ach-card--award::after {
+      content: '';
+      position: absolute; top: 0; left: -100%;
+      width: 55%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.03), transparent);
+      animation: shimmer 5s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .ach-card--award .ach-feat-logo { width: 56px; height: 56px; border-radius: 14px; }
+    .ach-card--award .ach-feat-logo i { font-size: 1.6rem; }
+    .ach-card--award .ach-feat-title { font-size: 1rem; }
+    .ach-card--award .ach-feat-sub   { font-size: .78rem; margin-bottom: .55rem; }
+    a.ach-card--award:hover { box-shadow: 0 8px 32px rgba(56,189,248,.15); transform: translateY(-3px); }
+    a.ach-card--award:hover .ach-feat-title { color: var(--cyan); }
+
+    @media (max-width: 600px) {
+      .ach-card--featured { flex-direction: column; align-items: flex-start; gap: 1.2rem; padding: 1.3rem; }
+      .ach-feat-logo { width: 60px; height: 60px; }
+      .ach-feat-title { font-size: 1.05rem; }
+    }
 
     /* ─── EDUCATION ──────────────────────────────────────────── */
     #education { background: var(--bg2); }
@@ -845,6 +953,80 @@
       .stats-inner { grid-template-columns: 1fr 1fr; }
       .hero-contact { flex-direction: column; gap: .55rem; }
     }
+    /* ════════════════════════════════════════════
+       GLOBAL GRADIENT BORDER + SHIMMER — ALL CARDS
+       ════════════════════════════════════════════ */
+
+    /* Gradient border: subtle by default */
+    .stat-card,
+    .skills-col,
+    .exp-card,
+    .project-card,
+    .edu-card,
+    .contact-link,
+    .contact-visual,
+    .hero-terminal {
+      border: 1px solid transparent;
+      background-image:
+        linear-gradient(var(--card), var(--card)),
+        linear-gradient(135deg, rgba(56,189,248,.2), rgba(129,140,248,.18), rgba(56,189,248,.2));
+      background-origin: padding-box, border-box;
+      background-clip:   padding-box, border-box;
+      overflow: hidden;
+    }
+
+    /* Hover: full vivid gradient border + glow */
+    .stat-card:hover,
+    .skills-col:hover,
+    .exp-card:hover,
+    .project-card:hover,
+    .edu-card:hover,
+    .contact-visual:hover,
+    .hero-terminal:hover {
+      background-image:
+        linear-gradient(var(--card), var(--card)),
+        linear-gradient(135deg, var(--cyan), var(--violet), #fbbf24, var(--cyan));
+      box-shadow: 0 8px 36px rgba(56,189,248,.14), 0 2px 8px rgba(0,0,0,.3);
+    }
+    .contact-link:hover {
+      background-image:
+        linear-gradient(rgba(56,189,248,.06), rgba(56,189,248,.06)),
+        linear-gradient(135deg, var(--cyan), var(--violet));
+    }
+
+    /* Shimmer sweep on all cards */
+    .stat-card::after,
+    .skills-col::after,
+    .exp-card::after,
+    .project-card::after,
+    .edu-card::after,
+    .contact-visual::after,
+    .hero-terminal::after {
+      content: '';
+      position: absolute; top: 0; left: -100%;
+      width: 55%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.032), transparent);
+      animation: shimmer 5s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+    /* stagger shimmer so all cards don't pulse together */
+    .skills-col:nth-child(2)::after  { animation-delay: .8s; }
+    .skills-col:nth-child(3)::after  { animation-delay: 1.6s; }
+    .stat-card:nth-child(2)::after   { animation-delay: .6s; }
+    .stat-card:nth-child(3)::after   { animation-delay: 1.2s; }
+    .stat-card:nth-child(4)::after   { animation-delay: 1.8s; }
+    .project-card:nth-child(2)::after { animation-delay: 1s; }
+    .project-card:nth-child(3)::after { animation-delay: 2s; }
+
+    /* ensure card content sits above shimmer layer */
+    .stat-card > *,
+    .skills-col > *,
+    .exp-card > *,
+    .project-card > *,
+    .edu-card > *,
+    .contact-visual > * { position: relative; z-index: 2; }
+
   </style>
 </head>
 <body>
@@ -1195,8 +1377,11 @@
           <i class="fas fa-brain"></i>
         </div>
         <div class="project-title">On-Prem AI-Ready Kubernetes Cluster with Observability</div>
+        <span class="project-client-badge">
+          <i class="fas fa-microchip"></i> Client: Fortune 500 Semiconductor Company
+        </span>
         <p class="project-desc">
-          Designed and deployed a highly available Kubernetes cluster on bare-metal nodes using Ansible, enabling production-grade orchestration without cloud dependency. Implemented out-of-band telemetry (BMC SOL/SEL logs, Systemd Journal) aggregated via ELK Stack and Prometheus/Grafana. Deployed Kagent for advanced node introspection. Integrated GPT OSS 20B for AI workloads.
+          Designed and deployed a highly available Kubernetes cluster on bare-metal nodes using Ansible, enabling production-grade AI workload orchestration without cloud dependency. Implemented out-of-band telemetry (BMC SOL/SEL logs, Systemd Journal) aggregated via ELK Stack and Prometheus/Grafana. Deployed Kagent for advanced node introspection. Integrated GPT OSS 20B for on-prem AI inference.
         </p>
         <div class="project-tech">
           <span class="tech-badge">Ansible</span>
@@ -1258,43 +1443,74 @@
 
     <div class="achievements-grid">
 
-      <a href="https://www.credly.com/badges/6342affe-9538-43f5-8b66-b1c438886938/public_url" target="_blank" rel="noopener" class="ach-card reveal">
-        <div class="ach-icon" style="background:rgba(251,191,36,.1);color:#fbbf24">
-          <i class="fas fa-certificate"></i>
+      <a href="https://www.credly.com/badges/6342affe-9538-43f5-8b66-b1c438886938/public_url" target="_blank" rel="noopener" class="ach-card ach-card--featured reveal">
+        <div class="ach-feat-logo">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes" />
         </div>
-        <div>
-          <div class="ach-title">Certified Kubernetes Administrator</div>
-          <div class="ach-sub">CNCF &nbsp;·&nbsp; 2025</div>
-        </div>
-      </a>
-
-      <a href="https://www.linkedin.com/posts/ridhampatel24_leadership-execution-impact-activity-7409646914759196674-ee3U?utm_source=share&utm_medium=member_desktop&rcm=ACoAADrTMeoBMmGhTvb8Y-E6EPHR77-Nk373WW4L" target="_blank" rel="noopener" class="ach-card reveal">
-        <div class="ach-icon" style="background:rgba(249,115,22,.1);color:#f97316">
-          <i class="fas fa-star"></i>
-        </div>
-        <div>
-          <div class="ach-title">Rising Star of the Year</div>
-          <div class="ach-sub">Bacancy Technology &nbsp;·&nbsp; 2025</div>
-        </div>
-      </a>
-
-      <a href="https://www.linkedin.com/posts/ridhampatel24_gratitude-employeeofthequarter-recognition-share-7381000009997123584-MPkA?utm_source=share&utm_medium=member_desktop&rcm=ACoAADrTMeoBMmGhTvb8Y-E6EPHR77-Nk373WW4" target="_blank" rel="noopener" class="ach-card reveal">
-        <div class="ach-icon" style="background:rgba(56,189,248,.1);color:var(--cyan)">
-          <i class="fas fa-trophy"></i>
-        </div>
-        <div>
-          <div class="ach-title">Employee of the Quarter</div>
-          <div class="ach-sub">Bacancy Technology &nbsp;·&nbsp; Q3 2025</div>
+        <div class="ach-feat-body">
+          <div class="ach-feat-badge">
+            <i class="fas fa-certificate"></i> Featured Certification
+          </div>
+          <div class="ach-feat-title">Certified Kubernetes Administrator (CKA)</div>
+          <div class="ach-feat-sub">Issued by CNCF &amp; The Linux Foundation &nbsp;·&nbsp; 2025</div>
+          <div class="ach-feat-tags">
+            <span class="ach-feat-tag">Kubernetes</span>
+            <span class="ach-feat-tag">CNCF</span>
+            <span class="ach-feat-tag">Linux Foundation</span>
+            <span class="ach-feat-tag">Cloud Native</span>
+            <span class="ach-feat-tag">Cluster Administration</span>
+          </div>
         </div>
       </a>
 
-      <a href="https://www.linkedin.com/posts/ridhampatel24_kubernetes-onprem-devops-share-7339502231848648704-c8vk?utm_source=share&utm_medium=member_desktop&rcm=ACoAADrTMeoBMmGhTvb8Y-E6EPHR77-Nk373WW4" target="_blank" rel="noopener" class="ach-card reveal">
-        <div class="ach-icon" style="background:rgba(129,140,248,.1);color:var(--violet)">
-          <i class="fas fa-award"></i>
+      <a href="https://www.linkedin.com/posts/ridhampatel24_leadership-execution-impact-activity-7409646914759196674-ee3U?utm_source=share&utm_medium=member_desktop&rcm=ACoAADrTMeoBMmGhTvb8Y-E6EPHR77-Nk373WW4L" target="_blank" rel="noopener" class="ach-card ach-card--award reveal">
+        <div class="ach-feat-logo" style="background:linear-gradient(135deg,rgba(249,115,22,.15),rgba(251,191,36,.1));border-color:rgba(249,115,22,.3)">
+          <i class="fas fa-star" style="font-size:2rem;color:#f97316"></i>
         </div>
-        <div>
-          <div class="ach-title">Spot Award</div>
-          <div class="ach-sub">Bacancy Technology</div>
+        <div class="ach-feat-body">
+          <div class="ach-feat-badge" style="background:rgba(249,115,22,.1);border-color:rgba(249,115,22,.3);color:#f97316">
+            <i class="fas fa-trophy"></i> Company Award
+          </div>
+          <div class="ach-feat-title">Rising Star of the Year</div>
+          <div class="ach-feat-sub">Bacancy Technology &nbsp;·&nbsp; 2025</div>
+          <div class="ach-feat-tags">
+            <span class="ach-feat-tag" style="color:#f97316;background:rgba(249,115,22,.07);border-color:rgba(249,115,22,.2)">Leadership</span>
+            <span class="ach-feat-tag" style="color:#f97316;background:rgba(249,115,22,.07);border-color:rgba(249,115,22,.2)">Excellence</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="https://www.linkedin.com/posts/ridhampatel24_gratitude-employeeofthequarter-recognition-share-7381000009997123584-MPkA?utm_source=share&utm_medium=member_desktop&rcm=ACoAADrTMeoBMmGhTvb8Y-E6EPHR77-Nk373WW4" target="_blank" rel="noopener" class="ach-card ach-card--award reveal">
+        <div class="ach-feat-logo" style="background:linear-gradient(135deg,rgba(56,189,248,.15),rgba(129,140,248,.1));border-color:rgba(56,189,248,.3)">
+          <i class="fas fa-trophy" style="font-size:2rem;color:var(--cyan)"></i>
+        </div>
+        <div class="ach-feat-body">
+          <div class="ach-feat-badge">
+            <i class="fas fa-medal"></i> Q3 Recognition
+          </div>
+          <div class="ach-feat-title">Employee of the Quarter</div>
+          <div class="ach-feat-sub">Bacancy Technology &nbsp;·&nbsp; Q3 2025</div>
+          <div class="ach-feat-tags">
+            <span class="ach-feat-tag">Performance</span>
+            <span class="ach-feat-tag">Q3 2025</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="https://www.linkedin.com/posts/ridhampatel24_kubernetes-onprem-devops-share-7339502231848648704-c8vk?utm_source=share&utm_medium=member_desktop&rcm=ACoAADrTMeoBMmGhTvb8Y-E6EPHR77-Nk373WW4" target="_blank" rel="noopener" class="ach-card ach-card--award reveal">
+        <div class="ach-feat-logo" style="background:linear-gradient(135deg,rgba(129,140,248,.15),rgba(56,189,248,.1));border-color:rgba(129,140,248,.3)">
+          <i class="fas fa-award" style="font-size:2rem;color:var(--violet)"></i>
+        </div>
+        <div class="ach-feat-body">
+          <div class="ach-feat-badge" style="background:rgba(129,140,248,.1);border-color:rgba(129,140,248,.3);color:var(--violet)">
+            <i class="fas fa-bolt"></i> Spot Recognition
+          </div>
+          <div class="ach-feat-title">Spot Award</div>
+          <div class="ach-feat-sub">Bacancy Technology</div>
+          <div class="ach-feat-tags">
+            <span class="ach-feat-tag" style="color:var(--violet);background:rgba(129,140,248,.07);border-color:rgba(129,140,248,.2)">DevOps</span>
+            <span class="ach-feat-tag" style="color:var(--violet);background:rgba(129,140,248,.07);border-color:rgba(129,140,248,.2)">Impact</span>
+          </div>
         </div>
       </a>
 
