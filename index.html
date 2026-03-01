@@ -33,7 +33,7 @@
       --radius:    16px;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
 
     body {
       font-family: 'Inter', sans-serif;
@@ -613,13 +613,14 @@
     /* shimmer sweep */
     .ach-card--featured::after {
       content: '';
-      position: absolute; top: 0; left: -100%;
+      position: absolute; top: 0; left: 0;
       width: 55%; height: 100%;
       background: linear-gradient(90deg, transparent, rgba(255,255,255,.035), transparent);
       animation: shimmer 4s ease-in-out infinite;
       pointer-events: none;
+      transform: translateX(-200%);
     }
-    @keyframes shimmer { 0%,100%{left:-100%} 50%{left:150%} }
+    @keyframes shimmer { 0%,100%{transform:translateX(-200%)} 50%{transform:translateX(280%)} }
 
     .ach-feat-logo {
       width: 80px; height: 80px; flex-shrink: 0;
@@ -671,11 +672,12 @@
     }
     .ach-card--award::after {
       content: '';
-      position: absolute; top: 0; left: -100%;
+      position: absolute; top: 0; left: 0;
       width: 55%; height: 100%;
       background: linear-gradient(90deg, transparent, rgba(255,255,255,.03), transparent);
       animation: shimmer 5s ease-in-out infinite;
       pointer-events: none;
+      transform: translateX(-200%);
     }
     .ach-card--award .ach-feat-logo { width: 56px; height: 56px; border-radius: 14px; }
     .ach-card--award .ach-feat-logo i { font-size: 1.6rem; }
@@ -1003,12 +1005,13 @@
     .contact-visual::after,
     .hero-terminal::after {
       content: '';
-      position: absolute; top: 0; left: -100%;
+      position: absolute; top: 0; left: 0;
       width: 55%; height: 100%;
       background: linear-gradient(90deg, transparent, rgba(255,255,255,.032), transparent);
       animation: shimmer 5s ease-in-out infinite;
       pointer-events: none;
       z-index: 1;
+      transform: translateX(-200%);
     }
     /* stagger shimmer so all cards don't pulse together */
     .skills-col:nth-child(2)::after  { animation-delay: .8s; }
