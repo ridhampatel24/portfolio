@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- background -->
+  <rect width="64" height="64" rx="14" fill="#080c18"/>
+  <!-- bracket left -->
+  <text x="4" y="46" font-family="monospace" font-size="38" font-weight="700" fill="#38bdf8">&lt;</text>
+  <!-- letter R -->
+  <text x="19" y="46" font-family="monospace" font-size="30" font-weight="700" fill="#e2e8f0">R</text>
+  <!-- bracket right / -->
+  <text x="39" y="46" font-family="monospace" font-size="38" font-weight="700" fill="#38bdf8">/&gt;</text>
+</svg>
