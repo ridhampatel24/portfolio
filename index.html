@@ -381,49 +381,57 @@
     /* ─── SKILLS ──────────────────────────────────────────────── */
     #skills { background: var(--bg2); }
 
-    .skills-grid {
+    .skills-table-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.4rem;
+      align-items: start;
     }
-    .skill-card {
+    .skills-col {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 1.6rem;
-      transition: border-color .3s, transform .3s, box-shadow .3s;
+      overflow: hidden;
+      transition: border-color .3s;
     }
-    .skill-card:hover {
-      border-color: var(--border2);
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0,0,0,.3);
+    .skills-col:hover { border-color: var(--border2); }
+    .skills-col-header {
+      display: flex; align-items: center; gap: .6rem;
+      padding: .9rem 1.1rem;
+      background: rgba(56,189,248,.05);
+      border-bottom: 1px solid var(--border);
+      font-size: .875rem; font-weight: 700;
+      letter-spacing: .2px;
     }
-    .skill-card-header {
-      display: flex; align-items: center; gap: .8rem;
-      margin-bottom: 1.2rem;
+    .skills-col-header i { font-size: .95rem; }
+    .skill-row {
+      display: flex; align-items: center; gap: .75rem;
+      padding: .65rem 1rem;
+      border-bottom: 1px solid var(--border);
+      transition: background .2s;
     }
-    .skill-icon {
-      width: 40px; height: 40px;
+    .skill-row:last-child { border-bottom: none; }
+    .skill-row:hover { background: rgba(56,189,248,.04); }
+    .sk-icon {
+      width: 34px; height: 34px; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
-      border-radius: 10px;
-      font-size: 1.2rem;
+      border-radius: 8px;
+      background: rgba(255,255,255,.04);
+    }
+    .sk-icon img { width: 22px; height: 22px; object-fit: contain; }
+    .sk-icon i { font-size: 1.05rem; }
+    .sk-icon .inv { filter: invert(1) brightness(1.4); }
+    .sk-name { flex: 1; font-size: .85rem; color: var(--muted2); line-height: 1.35; }
+    .sk-yrs {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .7rem; color: var(--muted);
+      background: rgba(56,189,248,.07);
+      border: 1px solid rgba(56,189,248,.13);
+      border-radius: 5px;
+      padding: .15rem .5rem;
+      white-space: nowrap;
       flex-shrink: 0;
     }
-    .skill-card-header h3 { font-size: .95rem; font-weight: 700; }
-
-    .skill-tags { display: flex; flex-wrap: wrap; gap: .45rem; }
-    .tag {
-      display: inline-block;
-      padding: .25rem .7rem;
-      background: rgba(56,189,248,.08);
-      border: 1px solid rgba(56,189,248,.18);
-      border-radius: 6px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .73rem;
-      color: var(--muted2);
-      transition: background .2s, color .2s;
-    }
-    .tag:hover { background: rgba(56,189,248,.15); color: var(--cyan); }
 
     /* ─── EXPERIENCE ──────────────────────────────────────────── */
     #experience { background: var(--bg); }
@@ -568,6 +576,11 @@
     }
     .ach-title { font-size: .9rem; font-weight: 700; margin-bottom: .2rem; }
     .ach-sub { font-size: .78rem; color: var(--muted); }
+    a.ach-card { cursor: pointer; }
+    a.ach-card .ach-title {
+      transition: color .2s;
+    }
+    a.ach-card:hover .ach-title { color: var(--cyan); }
 
     /* ─── EDUCATION ──────────────────────────────────────────── */
     #education { background: var(--bg2); }
@@ -717,7 +730,7 @@
       .contact-wrapper { grid-template-columns: 1fr; }
       .contact-visual { order: -1; }
 
-      .skills-grid { grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr)); }
+      .skills-table-grid { grid-template-columns: 1fr 1fr; }
       .projects-grid { grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); }
       section { padding: 80px 5%; }
       #stats  { padding: 36px 5%; }
@@ -765,8 +778,8 @@
       .stat-card { padding: 1.1rem .75rem; }
 
       /* skills */
-      .skills-grid { grid-template-columns: 1fr; gap: 1rem; }
-      .skill-card { padding: 1.2rem; }
+      .skills-table-grid { grid-template-columns: 1fr; }
+      .sk-name { font-size: .82rem; }
 
       /* experience */
       .timeline { padding-left: 1.4rem; }
@@ -968,115 +981,164 @@
     <h2 class="section-title">Technical <span class="hl">Skills</span></h2>
     <div class="sep"></div>
 
-    <div class="skills-grid">
+    <div class="skills-table-grid">
 
-      <div class="skill-card reveal">
-        <div class="skill-card-header">
-          <div class="skill-icon" style="background:rgba(56,189,248,.12);color:var(--cyan)">
-            <i class="fas fa-dharmachakra"></i>
-          </div>
-          <h3>Kubernetes</h3>
+      <!-- ── Main Expertise ── -->
+      <div class="skills-col reveal">
+        <div class="skills-col-header">
+          <i class="fas fa-star" style="color:#fbbf24"></i> Main Expertise
         </div>
-        <div class="skill-tags">
-          <span class="tag">kubeadm</span>
-          <span class="tag">Talos Linux</span>
-          <span class="tag">Helm</span>
-          <span class="tag">kubectl</span>
-          <span class="tag">Gateway APIs</span>
-          <span class="tag">Cilium</span>
-          <span class="tag">Kagent</span>
+
+        <div class="skill-row">
+          <div class="sk-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes" /></div>
+          <span class="sk-name">Kubernetes</span>
+          <span class="sk-yrs">2 yrs</span>
+        </div>
+        <div class="skill-row">
+          <div class="sk-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-plain.svg" alt="Docker" /></div>
+          <span class="sk-name">Docker</span>
+          <span class="sk-yrs">3 yrs</span>
+        </div>
+        <div class="skill-row">
+          <div class="sk-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="AWS" /></div>
+          <span class="sk-name">AWS</span>
+          <span class="sk-yrs">1 yr</span>
+        </div>
+        <div class="skill-row">
+          <div class="sk-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" alt="Azure" /></div>
+          <span class="sk-name">Azure</span>
+          <span class="sk-yrs">1 yr</span>
+        </div>
+        <div class="skill-row">
+          <div class="sk-icon"><i class="fab fa-linux" style="color:#f5d033"></i></div>
+          <span class="sk-name">Linux Administration</span>
+          <span class="sk-yrs">4 yrs</span>
+        </div>
+        <div class="skill-row">
+          <div class="sk-icon"><i class="fas fa-terminal" style="color:#34d399"></i></div>
+          <span class="sk-name">Bash Scripting</span>
+          <span class="sk-yrs">4 yrs</span>
+        </div>
+        <div class="skill-row">
+          <div class="sk-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ansible/ansible-original.svg" alt="Ansible" onerror="this.style.display='none';this.parentNode.innerHTML='<i class=\'fas fa-cogs\' style=\'color:#e0443c\'></i>'" /></div>
+          <span class="sk-name">Ansible</span>
+          <span class="sk-yrs">2 yrs</span>
+        </div>
+        <div class="skill-row">
+          <div class="sk-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" alt="Terraform" /></div>
+          <span class="sk-name">Terraform</span>
+          <span class="sk-yrs">1 yr</span>
+        </div>
+        <div class="skill-row">
+          <div class="sk-icon"><img src="https://cdn.simpleicons.org/ceph/EF5C55" alt="Ceph" onerror="this.style.display='none';this.parentNode.innerHTML='<i class=\'fas fa-database\' style=\'color:#EF5C55\'></i>'" /></div>
+          <span class="sk-name">Ceph Storage</span>
+          <span class="sk-yrs">1 yr</span>
+        </div>
+        <div class="skill-row">
+          <div class="sk-icon"><i class="fas fa-infinity" style="color:#38bdf8"></i></div>
+          <span class="sk-name">CI/CD Pipelines</span>
+          <span class="sk-yrs">2 yrs</span>
+        </div>
+        <div class="skill-row">
+          <div class="sk-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/argocd/argocd-original.svg" alt="ArgoCD" onerror="this.style.display='none';this.parentNode.innerHTML='<img src=\'https://cdn.simpleicons.org/argo/EF7B4D\' style=\'width:22px;height:22px\' />'" /></div>
+          <span class="sk-name">Argo CD</span>
+          <span class="sk-yrs">1 yr</span>
         </div>
       </div>
 
-      <div class="skill-card reveal">
-        <div class="skill-card-header">
-          <div class="skill-icon" style="background:rgba(52,211,153,.12);color:var(--green)">
-            <i class="fab fa-linux"></i>
-          </div>
-          <h3>Linux &amp; Scripting</h3>
+      <!-- ── Other Skills ── -->
+      <div class="skills-col reveal">
+        <div class="skills-col-header">
+          <i class="fas fa-tools" style="color:var(--cyan)"></i> Other Skills
         </div>
-        <div class="skill-tags">
-          <span class="tag">Linux Administration</span>
-          <span class="tag">Bash Scripting</span>
-          <span class="tag">Systemd</span>
-          <span class="tag">Shell Automation</span>
+
+        <div class="skill-row">
+          <div class="sk-icon"><i class="fab fa-github" style="color:#e2e8f0"></i></div>
+          <span class="sk-name">GitHub Actions</span>
+          <span class="sk-yrs">1 yr</span>
+        </div>
+        <div class="skill-row">
+          <div class="sk-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" alt="Jenkins" /></div>
+          <span class="sk-name">Jenkins</span>
+          <span class="sk-yrs">1 yr</span>
+        </div>
+        <div class="skill-row">
+          <div class="sk-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg" alt="Prometheus" /></div>
+          <span class="sk-name">Prometheus</span>
+          <span class="sk-yrs">1 yr</span>
+        </div>
+        <div class="skill-row">
+          <div class="sk-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg" alt="Grafana" /></div>
+          <span class="sk-name">Grafana</span>
+          <span class="sk-yrs">1 yr</span>
+        </div>
+        <div class="skill-row">
+          <div class="sk-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/elasticsearch/elasticsearch-original.svg" alt="Elastic" onerror="this.style.display='none';this.parentNode.innerHTML='<i class=\'fas fa-search\' style=\'color:#fbbf24\'></i>'" /></div>
+          <span class="sk-name">ELK Stack</span>
+          <span class="sk-yrs">1 yr</span>
+        </div>
+        <div class="skill-row">
+          <div class="sk-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg" alt="Nginx" /></div>
+          <span class="sk-name">Nginx / Apache</span>
+          <span class="sk-yrs">2 yrs</span>
+        </div>
+        <div class="skill-row">
+          <div class="sk-icon"><i class="fas fa-anchor" style="color:#38bdf8"></i></div>
+          <span class="sk-name">Helm</span>
+          <span class="sk-yrs">1 yr</span>
+        </div>
+        <div class="skill-row">
+          <div class="sk-icon"><i class="fas fa-shield-alt" style="color:#818cf8"></i></div>
+          <span class="sk-name">Talos Linux</span>
+          <span class="sk-yrs">1 yr</span>
+        </div>
+        <div class="skill-row">
+          <div class="sk-icon"><i class="fas fa-box" style="color:#60a5fa"></i></div>
+          <span class="sk-name">Podman / Containerd</span>
+          <span class="sk-yrs">1 yr</span>
+        </div>
+        <div class="skill-row">
+          <div class="sk-icon"><i class="fas fa-microchip" style="color:#a78bfa"></i></div>
+          <span class="sk-name">OOB Telemetry (BMC)</span>
+          <span class="sk-yrs">1 yr</span>
         </div>
       </div>
 
-      <div class="skill-card reveal">
-        <div class="skill-card-header">
-          <div class="skill-icon" style="background:rgba(251,191,36,.1);color:#fbbf24">
-            <i class="fab fa-docker"></i>
-          </div>
-          <h3>Containers</h3>
+      <!-- ── AI & Modern Tools ── -->
+      <div class="skills-col reveal">
+        <div class="skills-col-header">
+          <i class="fas fa-robot" style="color:var(--green)"></i> AI &amp; Modern Tools
         </div>
-        <div class="skill-tags">
-          <span class="tag">Docker</span>
-          <span class="tag">Containerd</span>
-          <span class="tag">Podman</span>
-          <span class="tag">OCI Images</span>
-        </div>
-      </div>
 
-      <div class="skill-card reveal">
-        <div class="skill-card-header">
-          <div class="skill-icon" style="background:rgba(249,115,22,.1);color:#f97316">
-            <i class="fas fa-infinity"></i>
-          </div>
-          <h3>CI/CD Pipelines</h3>
+        <div class="skill-row">
+          <div class="sk-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="GitOps" /></div>
+          <span class="sk-name">GitOps</span>
+          <span class="sk-yrs">1 yr</span>
         </div>
-        <div class="skill-tags">
-          <span class="tag">Jenkins</span>
-          <span class="tag">GitHub Actions</span>
-          <span class="tag">Azure DevOps</span>
-          <span class="tag">GitOps</span>
+        <div class="skill-row">
+          <div class="sk-icon"><i class="fas fa-dharmachakra" style="color:#38bdf8"></i></div>
+          <span class="sk-name">kubeadm</span>
+          <span class="sk-yrs">2 yrs</span>
         </div>
-      </div>
-
-      <div class="skill-card reveal">
-        <div class="skill-card-header">
-          <div class="skill-icon" style="background:rgba(129,140,248,.12);color:var(--violet)">
-            <i class="fas fa-cloud"></i>
-          </div>
-          <h3>Cloud &amp; IaC</h3>
+        <div class="skill-row">
+          <div class="sk-icon"><i class="fas fa-network-wired" style="color:#34d399"></i></div>
+          <span class="sk-name">Cilium / Gateway APIs</span>
+          <span class="sk-yrs">1 yr</span>
         </div>
-        <div class="skill-tags">
-          <span class="tag">AWS</span>
-          <span class="tag">Azure</span>
-          <span class="tag">Terraform</span>
-          <span class="tag">Ansible</span>
-          <span class="tag">Proxmox</span>
+        <div class="skill-row">
+          <div class="sk-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/proxmox/proxmox-original.svg" alt="Proxmox" onerror="this.style.display='none';this.parentNode.innerHTML='<i class=\'fas fa-server\' style=\'color:#e57000\'></i>'" /></div>
+          <span class="sk-name">Proxmox</span>
+          <span class="sk-yrs">1 yr</span>
         </div>
-      </div>
-
-      <div class="skill-card reveal">
-        <div class="skill-card-header">
-          <div class="skill-icon" style="background:rgba(244,63,94,.1);color:#f43f5e">
-            <i class="fas fa-chart-line"></i>
-          </div>
-          <h3>Observability</h3>
+        <div class="skill-row">
+          <div class="sk-icon"><i class="fas fa-robot" style="color:#818cf8"></i></div>
+          <span class="sk-name">Kagent</span>
+          <span class="sk-yrs">&lt; 1 yr</span>
         </div>
-        <div class="skill-tags">
-          <span class="tag">Prometheus</span>
-          <span class="tag">Grafana</span>
-          <span class="tag">ELK Stack</span>
-          <span class="tag">Ceph</span>
-          <span class="tag">BMC/SEL</span>
-        </div>
-      </div>
-
-      <div class="skill-card reveal">
-        <div class="skill-card-header">
-          <div class="skill-icon" style="background:rgba(56,189,248,.1);color:var(--cyan)">
-            <i class="fas fa-server"></i>
-          </div>
-          <h3>Web Servers</h3>
-        </div>
-        <div class="skill-tags">
-          <span class="tag">Nginx</span>
-          <span class="tag">Apache</span>
-          <span class="tag">Reverse Proxy</span>
-          <span class="tag">Load Balancing</span>
+        <div class="skill-row">
+          <div class="sk-icon"><i class="fas fa-brain" style="color:#34d399"></i></div>
+          <span class="sk-name">GPT OSS 20B</span>
+          <span class="sk-yrs">&lt; 1 yr</span>
         </div>
       </div>
 
@@ -1196,7 +1258,7 @@
 
     <div class="achievements-grid">
 
-      <div class="ach-card reveal">
+      <a href="https://www.credly.com/badges/6342affe-9538-43f5-8b66-b1c438886938/public_url" target="_blank" rel="noopener" class="ach-card reveal">
         <div class="ach-icon" style="background:rgba(251,191,36,.1);color:#fbbf24">
           <i class="fas fa-certificate"></i>
         </div>
@@ -1204,9 +1266,9 @@
           <div class="ach-title">Certified Kubernetes Administrator</div>
           <div class="ach-sub">CNCF &nbsp;·&nbsp; 2025</div>
         </div>
-      </div>
+      </a>
 
-      <div class="ach-card reveal">
+      <a href="https://www.linkedin.com/posts/ridhampatel24_leadership-execution-impact-activity-7409646914759196674-ee3U?utm_source=share&utm_medium=member_desktop&rcm=ACoAADrTMeoBMmGhTvb8Y-E6EPHR77-Nk373WW4L" target="_blank" rel="noopener" class="ach-card reveal">
         <div class="ach-icon" style="background:rgba(249,115,22,.1);color:#f97316">
           <i class="fas fa-star"></i>
         </div>
@@ -1214,9 +1276,9 @@
           <div class="ach-title">Rising Star of the Year</div>
           <div class="ach-sub">Bacancy Technology &nbsp;·&nbsp; 2025</div>
         </div>
-      </div>
+      </a>
 
-      <div class="ach-card reveal">
+      <a href="https://www.linkedin.com/posts/ridhampatel24_gratitude-employeeofthequarter-recognition-share-7381000009997123584-MPkA?utm_source=share&utm_medium=member_desktop&rcm=ACoAADrTMeoBMmGhTvb8Y-E6EPHR77-Nk373WW4" target="_blank" rel="noopener" class="ach-card reveal">
         <div class="ach-icon" style="background:rgba(56,189,248,.1);color:var(--cyan)">
           <i class="fas fa-trophy"></i>
         </div>
@@ -1224,9 +1286,9 @@
           <div class="ach-title">Employee of the Quarter</div>
           <div class="ach-sub">Bacancy Technology &nbsp;·&nbsp; Q3 2025</div>
         </div>
-      </div>
+      </a>
 
-      <div class="ach-card reveal">
+      <a href="https://www.linkedin.com/posts/ridhampatel24_kubernetes-onprem-devops-share-7339502231848648704-c8vk?utm_source=share&utm_medium=member_desktop&rcm=ACoAADrTMeoBMmGhTvb8Y-E6EPHR77-Nk373WW4" target="_blank" rel="noopener" class="ach-card reveal">
         <div class="ach-icon" style="background:rgba(129,140,248,.1);color:var(--violet)">
           <i class="fas fa-award"></i>
         </div>
@@ -1234,7 +1296,7 @@
           <div class="ach-title">Spot Award</div>
           <div class="ach-sub">Bacancy Technology</div>
         </div>
-      </div>
+      </a>
 
     </div>
   </div>
