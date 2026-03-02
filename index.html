@@ -6,10 +6,14 @@
   <title>Ridham Patel — DevOps Engineer</title>
   <meta name="description" content="Ridham Patel — DevOps Engineer. Kubernetes, Cloud Infrastructure, CI/CD, CKA Certified." />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- preconnect for skill/achievement icon CDN only -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.simpleicons.org" crossorigin />
+  <link rel="dns-prefetch" href="https://cdn.simpleicons.org" />
+  <!-- font awesome — deferred, non-render-blocking -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" /></noscript>
   <style>
   /* ═══════════════════════════════════════════════════════════════
      DESIGN TOKENS
@@ -31,7 +35,7 @@
     --muted:   #8899b4;
     --muted2:  #4d6080;
     --radius:  14px;
-    --mono: 'JetBrains Mono', monospace;
+    --mono: 'SF Mono', ui-monospace, 'Cascadia Mono', 'Fira Mono', 'Roboto Mono', Consolas, monospace;
   }
 
   html { scroll-behavior: smooth; overflow-x: hidden; }
@@ -39,7 +43,7 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: 'Inter', sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
     background: var(--bg);
     color: var(--text);
     line-height: 1.7;
@@ -181,14 +185,18 @@
   }
   .bg-icon {
     position: absolute;
-    opacity: .07;
-    filter: blur(.5px) saturate(2);
-    animation: bgFloat linear infinite;
+    width: clamp(40px, 5.5vw, 68px);
+    height: clamp(40px, 5.5vw, 68px);
+    opacity: .2;
+    /* SVGs from simple-icons npm use currentColor (black); invert to white for dark bg */
+    filter: invert(1) brightness(1.4);
+    animation: bgFloat ease-in-out infinite;
+    user-select: none;
   }
   @keyframes bgFloat {
-    0%   { transform: translateY(0px) rotate(0deg); opacity: .07; }
-    50%  { transform: translateY(-18px) rotate(8deg); opacity: .12; }
-    100% { transform: translateY(0px) rotate(0deg); opacity: .07; }
+    0%   { transform: translateY(0px)   rotate(0deg);  opacity: .20; }
+    50%  { transform: translateY(-18px) rotate(5deg);  opacity: .32; }
+    100% { transform: translateY(0px)   rotate(0deg);  opacity: .20; }
   }
 
   .hero-inner {
@@ -363,7 +371,7 @@
   .stats-inner {
     max-width: 1200px; margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1px;
     border: 1px solid var(--border);
     border-radius: 16px;
@@ -920,12 +928,11 @@
     border-bottom: 1px solid var(--border);
   }
   .cv-body {
-    padding: 1.2rem 1.6rem;
+    padding: 1.4rem;
     font-family: var(--mono);
-    font-size: .78rem; line-height: 1.95;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 0 2rem;
+    font-size: .78rem; line-height: 2;
   }
-  .cv-col { display: flex; flex-direction: column; }
+  .cv-col { display: contents; }
   .cv-line { display: block; }
   .cv-sign { color: var(--green); }
   .cv-cmd  { color: var(--cyan); }
@@ -1000,10 +1007,10 @@
     #hero { min-height: 100svh; min-height: 100vh; align-items: flex-start; padding-top: 88px; }
     .hero-inner      { grid-template-columns: 1fr; gap: 2rem; }
     .hero-terminal   { display: none; }
-    .bg-icon:nth-child(n+5) { display: none; } /* keep only 4 bg icons on tablet */
+    .bg-icon:nth-child(n+14) { display: none; } /* keep 13 icons on tablet */
 
     /* stats */
-    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .stats-inner { grid-template-columns: repeat(3, 1fr); }
 
     /* skills */
     .skill-chip-name { font-size: .78rem; }
@@ -1041,11 +1048,12 @@
     .hero-links  { flex-direction: column; gap: .55rem; }
     .hero-links a, .hero-links span { font-size: .78rem; word-break: break-all; }
 
-    /* hide ALL floating bg icons on small mobile — too busy */
-    .bg-icon { display: none; }
+    /* keep 8 icons on mobile, hide the rest */
+    .bg-icon:nth-child(n+9) { display: none; }
+    .bg-icon { opacity: .12; }
 
     /* stats */
-    .stats-inner { grid-template-columns: repeat(2, 1fr); border-radius: 12px; }
+    .stats-inner { grid-template-columns: repeat(3, 1fr); border-radius: 12px; }
     .stat-num    { font-size: 1.6rem; }
     .stat-label  { font-size: .7rem; }
     .stat-card   { padding: 1.2rem 1rem; }
@@ -1102,7 +1110,7 @@
     .cc-icon        { width: 40px; height: 40px; font-size: 1rem; flex-shrink: 0; }
     .cc-value       { font-size: .8rem; }
     .cc-arrow       { margin-top: 0; margin-left: auto; }
-    .cv-body        { grid-template-columns: 1fr; font-size: .72rem; padding: 1rem 1.1rem; }
+    .cv-body        { font-size: .72rem; padding: 1rem 1.1rem; }
     .contact-avail  { font-size: .68rem; }
 
     /* footer */
@@ -1115,7 +1123,7 @@
     #navbar { padding: 0 3.5%; }
     .logo   { font-size: .8rem; }
     .hero-name { font-size: clamp(2rem, 11vw, 2.6rem); }
-    .stats-inner { grid-template-columns: 1fr 1fr; }
+    .stats-inner { grid-template-columns: repeat(3, 1fr); }
     .stat-num { font-size: 1.4rem; }
   }
   </style>
@@ -1148,24 +1156,22 @@
 
 <!-- ─── HERO ─────────────────────────────────────────────────── -->
 <section id="hero">
-  <!-- floating DevOps tool icons in background -->
+
+  <!-- floating badges — hero section only -->
   <div class="bg-icons" aria-hidden="true">
-    <img class="bg-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg"
-      alt="" style="width:80px;top:12%;left:7%;animation-duration:7s;animation-delay:0s" />
-    <img class="bg-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-plain.svg"
-      alt="" style="width:70px;top:20%;right:8%;animation-duration:9s;animation-delay:1s" />
-    <img class="bg-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg"
-      alt="" style="width:60px;bottom:25%;left:5%;animation-duration:8s;animation-delay:2s" />
-    <img class="bg-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ansible/ansible-original.svg"
-      alt="" style="width:65px;bottom:30%;right:6%;animation-duration:10s;animation-delay:.5s" />
-    <img class="bg-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg"
-      alt="" style="width:55px;top:55%;left:15%;animation-duration:11s;animation-delay:3s" />
-    <img class="bg-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg"
-      alt="" style="width:55px;top:65%;right:14%;animation-duration:8.5s;animation-delay:1.5s" />
-    <img class="bg-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg"
-      alt="" style="width:72px;top:38%;left:2%;animation-duration:12s;animation-delay:2.5s" />
-    <img class="bg-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/argocd/argocd-original.svg"
-      alt="" style="width:58px;top:80%;right:20%;animation-duration:9.5s;animation-delay:.8s" />
+    <img class="bg-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/kubernetes.svg" alt="" loading="lazy" fetchpriority="low" onerror="this.style.display='none'" style="top:8%;left:4%;animation-duration:7s;animation-delay:0s">
+    <img class="bg-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/docker.svg" alt="" loading="lazy" fetchpriority="low" onerror="this.style.display='none'" style="top:10%;right:5%;animation-duration:9s;animation-delay:1s">
+    <img class="bg-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/ansible.svg" alt="" loading="lazy" fetchpriority="low" onerror="this.style.display='none'" style="top:20%;left:30%;animation-duration:10s;animation-delay:1.8s">
+    <img class="bg-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/terraform.svg" alt="" loading="lazy" fetchpriority="low" onerror="this.style.display='none'" style="top:38%;left:2%;animation-duration:8s;animation-delay:2s">
+    <img class="bg-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/amazonaws.svg" alt="" loading="lazy" fetchpriority="low" onerror="this.style.display='none'" style="top:35%;right:3%;animation-duration:12s;animation-delay:2.5s">
+    <img class="bg-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/microsoftazure.svg" alt="" loading="lazy" fetchpriority="low" onerror="this.style.display='none'" style="top:55%;left:1%;animation-duration:9.5s;animation-delay:.4s">
+    <img class="bg-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/prometheus.svg" alt="" loading="lazy" fetchpriority="low" onerror="this.style.display='none'" style="top:60%;right:4%;animation-duration:11s;animation-delay:3s">
+    <img class="bg-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/grafana.svg" alt="" loading="lazy" fetchpriority="low" onerror="this.style.display='none'" style="top:52%;left:44%;animation-duration:8.5s;animation-delay:1.5s">
+    <img class="bg-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/argo.svg" alt="" loading="lazy" fetchpriority="low" onerror="this.style.display='none'" style="top:75%;left:3%;animation-duration:9.5s;animation-delay:.8s">
+    <img class="bg-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/nginx.svg" alt="" loading="lazy" fetchpriority="low" onerror="this.style.display='none'" style="top:78%;right:5%;animation-duration:10s;animation-delay:2.2s">
+    <img class="bg-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/git.svg" alt="" loading="lazy" fetchpriority="low" onerror="this.style.display='none'" style="top:85%;left:38%;animation-duration:7.5s;animation-delay:1.2s">
+    <img class="bg-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/helm.svg" alt="" loading="lazy" fetchpriority="low" onerror="this.style.display='none'" style="top:25%;right:22%;animation-duration:11s;animation-delay:.6s">
+    <img class="bg-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/jenkins.svg" alt="" loading="lazy" fetchpriority="low" onerror="this.style.display='none'" style="top:68%;left:48%;animation-duration:8s;animation-delay:3.2s">
   </div>
 
   <div class="hero-inner">
@@ -1251,18 +1257,13 @@
   <div class="stats-inner">
     <div class="stat-card reveal">
       <div class="stat-icon"><i class="fas fa-calendar-alt"></i></div>
-      <div class="stat-num">1+</div>
+      <div class="stat-num">1.5+</div>
       <div class="stat-label">Years Experience</div>
     </div>
     <div class="stat-card reveal">
       <div class="stat-icon"><i class="fas fa-layer-group"></i></div>
-      <div class="stat-num">3+</div>
+      <div class="stat-num">5+</div>
       <div class="stat-label">Major Projects</div>
-    </div>
-    <div class="stat-card reveal">
-      <div class="stat-icon"><i class="fas fa-bolt"></i></div>
-      <div class="stat-num">40%</div>
-      <div class="stat-label">Deployment Efficiency</div>
     </div>
     <div class="stat-card reveal">
       <div class="stat-icon"><i class="fas fa-certificate"></i></div>
@@ -1286,41 +1287,41 @@
         <div class="skill-category-label"><i class="fas fa-dharmachakra" style="color:var(--cyan)"></i> Orchestration &amp; Cloud</div>
         <div class="skills-icon-grid">
           <div class="skill-chip">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes"/>
+            <img loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes"/>
             <span class="skill-chip-name">Kubernetes</span><span class="skill-chip-yrs">2y</span>
           </div>
           <div class="skill-chip">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-plain.svg" alt="Docker"/>
+            <img loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-plain.svg" alt="Docker"/>
             <span class="skill-chip-name">Docker</span><span class="skill-chip-yrs">3y</span>
           </div>
           <div class="skill-chip">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="AWS"/>
+            <img loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="AWS"/>
             <span class="skill-chip-name">AWS</span><span class="skill-chip-yrs">1y</span>
           </div>
           <div class="skill-chip">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" alt="Azure"/>
+            <img loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" alt="Azure"/>
             <span class="skill-chip-name">Azure</span><span class="skill-chip-yrs">1y</span>
           </div>
           <div class="skill-chip">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" alt="Terraform"/>
+            <img loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" alt="Terraform"/>
             <span class="skill-chip-name">Terraform</span><span class="skill-chip-yrs">1y</span>
           </div>
           <div class="skill-chip">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ansible/ansible-original.svg" alt="Ansible"/>
+            <img loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ansible/ansible-original.svg" alt="Ansible"/>
             <span class="skill-chip-name">Ansible</span><span class="skill-chip-yrs">2y</span>
           </div>
           <div class="skill-chip">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/argocd/argocd-original.svg" alt="ArgoCD"
+            <img loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/argocd/argocd-original.svg" alt="ArgoCD"
               onerror="this.src='https://cdn.simpleicons.org/argo/EF7B4D'"/>
             <span class="skill-chip-name">Argo CD</span><span class="skill-chip-yrs">1y</span>
           </div>
           <div class="skill-chip">
-            <img src="https://cdn.simpleicons.org/ceph/EF5C55" alt="Ceph"
+            <img loading="lazy" src="https://cdn.simpleicons.org/ceph/EF5C55" alt="Ceph"
               onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('afterbegin','<i class=\'fas fa-database\' style=\'color:#EF5C55;font-size:1.1rem\'></i>')"/>
             <span class="skill-chip-name">Ceph Storage</span><span class="skill-chip-yrs">1y</span>
           </div>
           <div class="skill-chip">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/proxmox/proxmox-original.svg" alt="Proxmox"
+            <img loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/proxmox/proxmox-original.svg" alt="Proxmox"
               onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('afterbegin','<i class=\'fas fa-server\' style=\'color:#e57000;font-size:1.1rem\'></i>')"/>
             <span class="skill-chip-name">Proxmox</span><span class="skill-chip-yrs">1y</span>
           </div>
@@ -1340,7 +1341,7 @@
             <span class="skill-chip-name">GitHub Actions</span><span class="skill-chip-yrs">1y</span>
           </div>
           <div class="skill-chip">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" alt="Jenkins"/>
+            <img loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" alt="Jenkins"/>
             <span class="skill-chip-name">Jenkins</span><span class="skill-chip-yrs">1y</span>
           </div>
           <div class="skill-chip">
@@ -1348,7 +1349,7 @@
             <span class="skill-chip-name">Helm</span><span class="skill-chip-yrs">1y</span>
           </div>
           <div class="skill-chip">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="GitOps"/>
+            <img loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="GitOps"/>
             <span class="skill-chip-name">GitOps</span><span class="skill-chip-yrs">1y</span>
           </div>
           <div class="skill-chip">
@@ -1375,20 +1376,20 @@
         <div class="skill-category-label"><i class="fas fa-chart-line" style="color:var(--orange)"></i> Observability &amp; AI</div>
         <div class="skills-icon-grid">
           <div class="skill-chip">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg" alt="Prometheus"/>
+            <img loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg" alt="Prometheus"/>
             <span class="skill-chip-name">Prometheus</span><span class="skill-chip-yrs">1y</span>
           </div>
           <div class="skill-chip">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg" alt="Grafana"/>
+            <img loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg" alt="Grafana"/>
             <span class="skill-chip-name">Grafana</span><span class="skill-chip-yrs">1y</span>
           </div>
           <div class="skill-chip">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/elasticsearch/elasticsearch-original.svg" alt="Elastic"
+            <img loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/elasticsearch/elasticsearch-original.svg" alt="Elastic"
               onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('afterbegin','<i class=\'fas fa-search\' style=\'color:#fbbf24;font-size:1.1rem\'></i>')"/>
             <span class="skill-chip-name">ELK Stack</span><span class="skill-chip-yrs">1y</span>
           </div>
           <div class="skill-chip">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg" alt="Nginx"/>
+            <img loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg" alt="Nginx"/>
             <span class="skill-chip-name">Nginx / Apache</span><span class="skill-chip-yrs">2y</span>
           </div>
           <div class="skill-chip">
@@ -1583,7 +1584,7 @@
       <a href="https://www.credly.com/badges/6342affe-9538-43f5-8b66-b1c438886938/public_url"
         target="_blank" rel="noopener" class="ach-cka reveal">
         <div class="ach-cka-logo">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="CKA"/>
+          <img loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="CKA"/>
         </div>
         <div class="ach-cka-body">
           <div class="ach-cka-badge">
@@ -1732,25 +1733,17 @@
         <span class="term-title">ridham@devops-engineer ~ zsh</span>
       </div>
       <div class="cv-body">
-        <div class="cv-col">
-          <span class="cv-line"><span class="cv-sign">❯</span> <span class="cv-cmd">ssh ridham@devops.engineer</span></span>
-          <span class="cv-line"><span class="cv-cmt"># Establishing secure connection...</span></span>
-          <span class="cv-line"><span class="cv-ok">✔ Connected. Welcome, Ridham Patel.</span></span>
-          <span class="cv-line">&nbsp;</span>
-          <span class="cv-line"><span class="cv-sign">❯</span> <span class="cv-cmd">cat profile.yaml</span></span>
-          <span class="cv-line"><span class="cv-key">name:</span>       <span class="cv-val">Ridham Patel</span></span>
-          <span class="cv-line"><span class="cv-key">role:</span>       <span class="cv-val">DevOps Engineer</span></span>
-          <span class="cv-line"><span class="cv-key">cert:</span>       <span class="cv-val">CKA — CNCF 2025</span></span>
-        </div>
-        <div class="cv-col">
-          <span class="cv-line"><span class="cv-key">location:</span>  <span class="cv-val">Ahmedabad, India</span></span>
-          <span class="cv-line"><span class="cv-key">remote:</span>    <span class="cv-ok">true (open worldwide)</span></span>
-          <span class="cv-line"><span class="cv-key">email:</span>     <span class="cv-val">ridhampatel2452@gmail.com</span></span>
-          <span class="cv-line"><span class="cv-key">linkedin:</span>  <span class="cv-val">ridhampatel24</span></span>
-          <span class="cv-line"><span class="cv-key">status:</span>    <span class="cv-ok">✔ available now</span></span>
-          <span class="cv-line">&nbsp;</span>
-          <span class="cv-line"><span class="cv-sign">❯</span> <span class="cursor-blink"></span></span>
-        </div>
+        <span class="cv-line"><span class="cv-sign">❯</span> <span class="cv-cmd">ssh ridham@devops.engineer</span></span>
+        <span class="cv-line"><span class="cv-cmt"># Connecting to Ridham Patel...</span></span>
+        <span class="cv-line"><span class="cv-ok">✔ Connection established</span></span>
+        <span class="cv-line">&nbsp;</span>
+        <span class="cv-line"><span class="cv-key">name:</span>     <span class="cv-val">Ridham Patel</span></span>
+        <span class="cv-line"><span class="cv-key">role:</span>     <span class="cv-val">DevOps Engineer</span></span>
+        <span class="cv-line"><span class="cv-key">location:</span> <span class="cv-val">Ahmedabad, India</span></span>
+        <span class="cv-line"><span class="cv-key">remote:</span>   <span class="cv-ok">true (open worldwide)</span></span>
+        <span class="cv-line"><span class="cv-key">status:</span>   <span class="cv-ok">✔ available</span></span>
+        <span class="cv-line">&nbsp;</span>
+        <span class="cv-line"><span class="cv-sign">❯</span> <span class="cursor-blink"></span></span>
       </div>
     </div>
   </div>
