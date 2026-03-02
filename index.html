@@ -187,16 +187,21 @@
     position: absolute;
     width: clamp(40px, 5.5vw, 68px);
     height: clamp(40px, 5.5vw, 68px);
-    opacity: .2;
-    /* SVGs from simple-icons npm use currentColor (black); invert to white for dark bg */
-    filter: invert(1) brightness(1.4);
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    opacity: .22;
     animation: bgFloat ease-in-out infinite;
     user-select: none;
+    pointer-events: none;
   }
   @keyframes bgFloat {
-    0%   { transform: translateY(0px)   rotate(0deg);  opacity: .20; }
-    50%  { transform: translateY(-18px) rotate(5deg);  opacity: .32; }
-    100% { transform: translateY(0px)   rotate(0deg);  opacity: .20; }
+    0%   { transform: translateY(0px)   rotate(0deg);  opacity: .22; }
+    50%  { transform: translateY(-18px) rotate(5deg);  opacity: .36; }
+    100% { transform: translateY(0px)   rotate(0deg);  opacity: .22; }
   }
 
   .hero-inner {
@@ -1159,19 +1164,19 @@
 
   <!-- floating badges — hero section only -->
   <div class="bg-icons" aria-hidden="true">
-    <img class="bg-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/kubernetes.svg" alt="" loading="lazy" fetchpriority="low" onerror="this.style.display='none'" style="top:8%;left:4%;animation-duration:7s;animation-delay:0s">
-    <img class="bg-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/docker.svg" alt="" loading="lazy" fetchpriority="low" onerror="this.style.display='none'" style="top:10%;right:5%;animation-duration:9s;animation-delay:1s">
-    <img class="bg-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/ansible.svg" alt="" loading="lazy" fetchpriority="low" onerror="this.style.display='none'" style="top:20%;left:30%;animation-duration:10s;animation-delay:1.8s">
-    <img class="bg-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/terraform.svg" alt="" loading="lazy" fetchpriority="low" onerror="this.style.display='none'" style="top:38%;left:2%;animation-duration:8s;animation-delay:2s">
-    <img class="bg-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/amazonaws.svg" alt="" loading="lazy" fetchpriority="low" onerror="this.style.display='none'" style="top:35%;right:3%;animation-duration:12s;animation-delay:2.5s">
-    <img class="bg-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/microsoftazure.svg" alt="" loading="lazy" fetchpriority="low" onerror="this.style.display='none'" style="top:55%;left:1%;animation-duration:9.5s;animation-delay:.4s">
-    <img class="bg-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/prometheus.svg" alt="" loading="lazy" fetchpriority="low" onerror="this.style.display='none'" style="top:60%;right:4%;animation-duration:11s;animation-delay:3s">
-    <img class="bg-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/grafana.svg" alt="" loading="lazy" fetchpriority="low" onerror="this.style.display='none'" style="top:52%;left:44%;animation-duration:8.5s;animation-delay:1.5s">
-    <img class="bg-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/argo.svg" alt="" loading="lazy" fetchpriority="low" onerror="this.style.display='none'" style="top:75%;left:3%;animation-duration:9.5s;animation-delay:.8s">
-    <img class="bg-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/nginx.svg" alt="" loading="lazy" fetchpriority="low" onerror="this.style.display='none'" style="top:78%;right:5%;animation-duration:10s;animation-delay:2.2s">
-    <img class="bg-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/git.svg" alt="" loading="lazy" fetchpriority="low" onerror="this.style.display='none'" style="top:85%;left:38%;animation-duration:7.5s;animation-delay:1.2s">
-    <img class="bg-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/helm.svg" alt="" loading="lazy" fetchpriority="low" onerror="this.style.display='none'" style="top:25%;right:22%;animation-duration:11s;animation-delay:.6s">
-    <img class="bg-icon" src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/jenkins.svg" alt="" loading="lazy" fetchpriority="low" onerror="this.style.display='none'" style="top:68%;left:48%;animation-duration:8s;animation-delay:3.2s">
+    <div class="bg-icon" style="top:8%;left:4%;background:#326CE5;-webkit-mask-image:url('https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/kubernetes.svg');mask-image:url('https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/kubernetes.svg');animation-duration:7s;animation-delay:0s"></div>
+    <div class="bg-icon" style="top:10%;right:5%;background:#2496ED;-webkit-mask-image:url('https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/docker.svg');mask-image:url('https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/docker.svg');animation-duration:9s;animation-delay:1s"></div>
+    <div class="bg-icon" style="top:20%;left:30%;background:#EE0000;-webkit-mask-image:url('https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/ansible.svg');mask-image:url('https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/ansible.svg');animation-duration:10s;animation-delay:1.8s"></div>
+    <div class="bg-icon" style="top:38%;left:2%;background:#7B42BC;-webkit-mask-image:url('https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/terraform.svg');mask-image:url('https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/terraform.svg');animation-duration:8s;animation-delay:2s"></div>
+    <div class="bg-icon" style="top:35%;right:3%;background:#FF9900;-webkit-mask-image:url('https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/amazonaws.svg');mask-image:url('https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/amazonaws.svg');animation-duration:12s;animation-delay:2.5s"></div>
+    <div class="bg-icon" style="top:55%;left:1%;background:#0078D4;-webkit-mask-image:url('https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/microsoftazure.svg');mask-image:url('https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/microsoftazure.svg');animation-duration:9.5s;animation-delay:.4s"></div>
+    <div class="bg-icon" style="top:60%;right:4%;background:#E6522C;-webkit-mask-image:url('https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/prometheus.svg');mask-image:url('https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/prometheus.svg');animation-duration:11s;animation-delay:3s"></div>
+    <div class="bg-icon" style="top:52%;left:44%;background:#F46800;-webkit-mask-image:url('https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/grafana.svg');mask-image:url('https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/grafana.svg');animation-duration:8.5s;animation-delay:1.5s"></div>
+    <div class="bg-icon" style="top:75%;left:3%;background:#EF7B4D;-webkit-mask-image:url('https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/argo.svg');mask-image:url('https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/argo.svg');animation-duration:9.5s;animation-delay:.8s"></div>
+    <div class="bg-icon" style="top:78%;right:5%;background:#009639;-webkit-mask-image:url('https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/nginx.svg');mask-image:url('https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/nginx.svg');animation-duration:10s;animation-delay:2.2s"></div>
+    <div class="bg-icon" style="top:85%;left:38%;background:#F05032;-webkit-mask-image:url('https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/git.svg');mask-image:url('https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/git.svg');animation-duration:7.5s;animation-delay:1.2s"></div>
+    <div class="bg-icon" style="top:25%;right:22%;background:#4255CC;-webkit-mask-image:url('https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/helm.svg');mask-image:url('https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/helm.svg');animation-duration:11s;animation-delay:.6s"></div>
+    <div class="bg-icon" style="top:68%;left:48%;background:#D24939;-webkit-mask-image:url('https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/jenkins.svg');mask-image:url('https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/jenkins.svg');animation-duration:8s;animation-delay:3.2s"></div>
   </div>
 
   <div class="hero-inner">
